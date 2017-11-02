@@ -28,20 +28,19 @@ public class SpellCheckerTester {
 
 	public static int extraCredit = 0;
 
-
 	@BeforeClass
 	public static void beforeTesting() {
 		totalScore = 0;
 		extraCredit = 0;
 	}
 
-
 	@AfterClass
 	public static void afterTesting() {
 		System.out.println("Estimated score (assuming no late penalties, etc.) = " + totalScore);
 		System.out.println("Estimated extra credit (assuming on time submission) = " + extraCredit);
 
-		// If the project follows the naming convention, save the results in a folder on the desktop. (Alex Kohanim)
+		// If the project follows the naming convention, save the results in a folder on
+		// the desktop. (Alex Kohanim)
 		try {
 			String directory = substringAfterLast(System.getProperty("user.dir"), File.separator);
 			String userName = substringBefore(directory, "_").trim();
@@ -61,7 +60,6 @@ public class SpellCheckerTester {
 			e.printStackTrace();
 		}
 	}
-
 
 	@Test(timeout = 10000)
 	public void testImportFile() throws Exception {
@@ -84,7 +82,6 @@ public class SpellCheckerTester {
 		totalScore += 12;
 	}
 
-
 	@Test(timeout = 10000)
 	public void testImportFileCompleteTree() throws Exception {
 		Dictionary dictionary = new BasicDictionary();
@@ -106,16 +103,13 @@ public class SpellCheckerTester {
 		extraCredit += 5;
 	}
 
-
 	int treeDepth;
-
 
 	public int getTreeDepth(Dictionary dictionary) {
 		treeDepth = 0;
 		goDeeper(dictionary.getRoot(), 0);
 		return treeDepth;
 	}
-
 
 	private void goDeeper(BinaryTreeNode node, int depth) {
 		if (node != null) {
@@ -130,7 +124,6 @@ public class SpellCheckerTester {
 		}
 	}
 
-
 	@Test(timeout = 10000)
 	public void testLoad() throws Exception {
 		Dictionary dictionary = new BasicDictionary();
@@ -143,7 +136,6 @@ public class SpellCheckerTester {
 
 		totalScore += 8;
 	}
-
 
 	@Test(timeout = 10000)
 	public void testSave() throws Exception {
@@ -163,7 +155,6 @@ public class SpellCheckerTester {
 		totalScore += 8;
 	}
 
-
 	@Test(timeout = 10000)
 	public void testFind() throws Exception {
 		Dictionary dictionary = new BasicDictionary();
@@ -179,7 +170,6 @@ public class SpellCheckerTester {
 
 		totalScore += 8;
 	}
-
 
 	private void checkWord(Dictionary dictionary, String dictionaryPath, String word, String[] expectedResult) {
 		String[] result = dictionary.find(word);
@@ -198,7 +188,6 @@ public class SpellCheckerTester {
 
 	}
 
-
 	@Test
 	public void testLoadDocument() throws Exception {
 		String dictionaryText = FileUtils.readFileToString(new File("small_dictionary.txt"));
@@ -215,7 +204,6 @@ public class SpellCheckerTester {
 
 		totalScore += 2;
 	}
-
 
 	@Test
 	public void testSpellCheckWithOneUnknownWord() throws Exception {
@@ -245,7 +233,6 @@ public class SpellCheckerTester {
 
 		totalScore += 6;
 	}
-
 
 	@Test
 	public void testSpellCheckReplaceOneUnknownWord() throws Exception {
@@ -287,7 +274,6 @@ public class SpellCheckerTester {
 		totalScore += 6;
 	}
 
-
 	@Test
 	public void testSpellCheckNoUnknownWords() throws Exception {
 		SpellChecker basicSpellChecker = new BasicSpellChecker();
@@ -309,7 +295,6 @@ public class SpellCheckerTester {
 
 		totalScore += 4;
 	}
-
 
 	@Test
 	public void testSpellCheckReplaceUnknowns() throws Exception {
@@ -408,7 +393,6 @@ public class SpellCheckerTester {
 		totalScore += 4;
 	}
 
-
 	@Test
 	public void testSpellCheckNoSuccessor() throws Exception {
 
@@ -439,7 +423,6 @@ public class SpellCheckerTester {
 		totalScore += 2;
 	}
 
-
 	@Test
 	public void testPmd() {
 		try {
@@ -451,7 +434,6 @@ public class SpellCheckerTester {
 		totalScore += 6;
 
 	}
-
 
 	private static void execPmd(String srcFolder, String rulePath) throws Exception {
 
@@ -502,7 +484,6 @@ public class SpellCheckerTester {
 
 	}
 
-
 	private static String trimFullClassPaths(String output) {
 		// Shorten output to just the short class name, line, and error.
 		String[] lines = output.split(getProperty("line.separator"));
@@ -513,7 +494,6 @@ public class SpellCheckerTester {
 		String trimmedOutput = sb.toString();
 		return trimmedOutput;
 	}
-
 
 	private static void verifySrcAndRulesExist(File fileFolderToCheck, File ruleFile) throws Exception {
 		if (!fileFolderToCheck.exists())
@@ -528,7 +508,6 @@ public class SpellCheckerTester {
 			throw new FileNotFoundException(
 					"The rule set file '" + ruleFile.getAbsolutePath() + "' could not be found.");
 	}
-
 
 	private static String getOutput(InputStream inputStream) throws IOException {
 		StringBuilder sb = new StringBuilder();
